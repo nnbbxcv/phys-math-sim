@@ -1,1 +1,40 @@
+{
+  "name": "Classical Mechanics | Landau 朗道力学专用环境",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace/disciplines/classical-mechanics",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/texlive:1": {}
+  },
+  "postCreateCommand": "pip install --upgrade pip && pip install sympy numpy scipy matplotlib plotly numba manim jupyterlab black ruff",
+  "forwardPorts": [8888, 8000, 3000],
+  "portsAttributes": {
+    "8888": {"label": "Jupyter Lab 力学笔记本", "onAutoForward": "openPreview"}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "jrieken.markdown-math",
+        "julialang.language-julia",
+        "mathematic.vscode-latex",
+        "eamodio.gitlens",
+        "PKief.material-icon-theme"
+      ],
+      "settings": {
+        "files.exclude": {
+          "disciplines/quantum-physics": true,
+          "disciplines/astrophysics": true,
+          ".devcontainer/quantum-physics": true,
+          ".devcontainer/astrophysics": true
+        },
+        "editor.formatOnSave": true,
+        "[python]": {"editor.defaultFormatter": "ms-python.black-formatter"}
+      }
+    }
+  }
+}
 
