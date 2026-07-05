@@ -1,40 +1,58 @@
 {
-  "name": "Classical Mechanics | Landau 朗道力学专用环境",
+  "name": "Classical Mechanics | Landau Environment",
+
   "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
-  "workspaceFolder": "/workspace/disciplines/classical-mechanics",
+
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/texlive:1": {}
   },
-  "postCreateCommand": "pip install --upgrade pip && pip install sympy numpy scipy matplotlib plotly numba manim jupyterlab black ruff",
-  "forwardPorts": [8888, 8000, 3000],
+
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "postCreateCommand": "python -m pip install --upgrade pip && pip install sympy numpy scipy matplotlib plotly numba manim jupyterlab black ruff",
+
+  "forwardPorts": [8888],
+
   "portsAttributes": {
-    "8888": {"label": "Jupyter Lab 力学笔记本", "onAutoForward": "openPreview"}
+    "8888": {
+      "label": "Jupyter Lab",
+      "onAutoForward": "openPreview"
+    }
   },
+
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-toolsai.jupyter",
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "jrieken.markdown-math",
-        "julialang.language-julia",
-        "mathematic.vscode-latex",
+        "ms-toolsai.jupyter",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "james-yu.latex-workshop",
         "eamodio.gitlens",
-        "PKief.material-icon-theme"
+        "PKief.material-icon-theme",
+        "yzhang.markdown-all-in-one",
+        "DavidAnson.vscode-markdownlint"
       ],
+
       "settings": {
-        "files.exclude": {
-          "disciplines/quantum-physics": true,
-          "disciplines/astrophysics": true,
-          ".devcontainer/quantum-physics": true,
-          ".devcontainer/astrophysics": true
-        },
         "editor.formatOnSave": true,
-        "[python]": {"editor.defaultFormatter": "ms-python.black-formatter"}
+
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+
+        "python.analysis.typeCheckingMode": "basic",
+
+        "jupyter.askForKernelRestart": false,
+
+        "files.exclude": {
+          "**/.git": true
+        }
       }
     }
   }
 }
+
 
